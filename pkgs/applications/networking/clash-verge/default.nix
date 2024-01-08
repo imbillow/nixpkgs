@@ -4,7 +4,6 @@
 , dpkg
 , wrapGAppsHook
 , autoPatchelfHook
-, clash-meta
 , openssl
 , webkitgtk
 , udev
@@ -13,11 +12,11 @@
 
 stdenv.mkDerivation rec {
   pname = "clash-verge";
-  version = "1.3.8";
+  version = "1.3.9";
 
   src = fetchurl {
-    url = "https://github.com/zzzgydi/clash-verge/releases/download/v${version}/clash-verge_${version}_amd64.deb";
-    hash = "sha256-kOju4yaa+EKzFWDrk0iSJVoWkQMBjQG3hKLfAsqlsy8=";
+    url = "https://github.com/MetaCubeX/clash-verge/releases/download/v${version}/clash-verge_${version}_amd64.deb";
+    hash = "sha256-tEmcBm8zymkE4GZRAD8Yi0m8zyPmnyAWGkqHlkYwidM=";
   };
 
   nativeBuildInputs = [
@@ -42,13 +41,8 @@ stdenv.mkDerivation rec {
 
     mkdir -p $out/bin
     mv usr/* $out
-    rm $out/bin/{clash,clash-meta}
 
     runHook postInstall
-  '';
-
-  postFixup = ''
-    ln -s ${lib.getExe clash-meta} $out/bin/clash-meta
   '';
 
   meta = with lib; {
